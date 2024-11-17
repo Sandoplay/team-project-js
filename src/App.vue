@@ -13,12 +13,18 @@
       <router-view />
     </v-main>
 
-    <v-footer app>
-      <span>&copy; 2024</span>
-    </v-footer>
+    <FooterComponent />
   </v-app>
 </template>
 
-<script setup lang="ts">
-// Component logic here
+<script>
+import FooterComponent from './components/Footer.vue'
+
+export default {
+  name: 'App',
+  components: {
+    FooterComponent
+  }
+}
 </script>
+

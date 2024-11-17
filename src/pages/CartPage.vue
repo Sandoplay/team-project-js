@@ -13,7 +13,16 @@
           <v-list>
             <v-list-item v-for="item in cartItems" :key="item.id">
               <template #prepend>
-                <v-img :src="item.image" width="100" height="100" cover />
+                <div class="cart-image-container">
+                  <v-img
+                    :src="item.image"
+                    width="100"
+                    height="100"
+                    :cover="false"
+                    :contain="true"
+                    class="bg-white"
+                  />
+                </div>
               </template>
 
               <v-list-item-title>{{ item.title }}</v-list-item-title>
@@ -67,3 +76,14 @@ const checkout = () => {
   console.log('Checkout clicked')
 }
 </script>
+<style scoped>
+.cart-image-container {
+  background: white;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+}
+</style>

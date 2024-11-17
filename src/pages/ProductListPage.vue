@@ -80,24 +80,27 @@
 
     <v-row v-if="!loading && !error">
       <v-col
-          v-for="product in paginatedProducts"
-          :key="product.id"
-          cols="12"
-          sm="6"
-          md="4"
-          lg="3"
-      >
-        <v-card>
-          <v-img
-              :src="product.image"
-              height="200"
-              cover
-              class="bg-grey-lighten-2"
-          />
+      v-for="product in paginatedProducts"
+      :key="product.id"
+      cols="12"
+      sm="6"
+      md="4"
+      lg="3"
+  >
+    <v-card height="100%">
+      <div class="product-image-container">
+        <v-img
+            :src="product.image"
+            height="200"
+            class="bg-grey-lighten-2"
+            :cover="false"
+            :contain="true"
+        />
+      </div>
 
-          <v-card-title class="text-truncate">
-            {{ product.title }}
-          </v-card-title>
+      <v-card-title class="text-truncate">
+        {{ product.title }}
+      </v-card-title>
 
           <v-card-text>
             <div class="d-flex align-center justify-space-between">
@@ -212,3 +215,13 @@ watch(currentPage, newPage => {
   updateFilters()
 })
 </script>
+<style scoped>
+.product-image-container {
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  height: 200px;
+}
+</style>

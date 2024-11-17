@@ -6,12 +6,15 @@
 
       <v-row>
         <v-col cols="12" md="6">
-          <v-img
-              :src="product.image"
-              height="400"
-              cover
-              class="bg-grey-lighten-2"
-          />
+          <v-card class="product-detail-image-container">
+            <v-img
+                :src="product.image"
+                height="400"
+                :cover="false"
+                :contain="true"
+                class="bg-white"
+            />
+          </v-card>
         </v-col>
 
         <v-col cols="12" md="6">
@@ -80,3 +83,14 @@ const toggleFavorite = (product: Product) => {
   favoritesStore.toggleFavorite(product)
 }
 </script>
+
+<style scoped>
+.product-detail-image-container {
+  background: white;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+</style>

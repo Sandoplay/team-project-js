@@ -1,0 +1,1252 @@
+api\categories.ts
+import { api } from './index';
+import type { Category } from '@/types/category';
+
+export const categoriesApi = {
+  async getCategories(): Promise<Category[]> {
+    const { data } = await api.get('/categories');
+    return data;
+  },
+};
+########
+
+api\index.ts
+import axios from 'axios';
+
+export const api = axios.create({
+  baseURL: 'https://fakestoreapi.com',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
+export interface Product {
+  id: number;
+  title: string;
+  price: number;
+  description: string;
+  category: string;
+  image: string;
+  rating: {
+    rate: number;
+    count: number;
+  };
+}
+########
+
+api\products.ts
+import { api } from './index';
+import type { Product } from '@/types/product';
+
+export const productsApi = {
+  async getProducts(): Promise<Product[]> {
+    const { data } = await api.get('/products');
+    return data;
+  },
+
+  async getProduct(id: number): Promise<Product> {
+    const { data } = await api.get(`/products/${id}`);
+    return data;
+  },
+
+  async getProductsByCategory(category: string): Promise<Product[]> {
+    const { data } = await api.get(`/products/category/${category}`);
+    return data;
+  },
+
+  async getCategories(): Promise<string[]> {
+    const { data } = await api.get('/products/categories');
+    return data;
+  },
+};
+########
+
+components\Footer.vue
+<template>
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-columns">
+        <!-- Перша колонка -->
+        <div class="footer-column">
+          <h3 class="developer-name">Олесь Левицький</h3>
+          <a
+            href="https://github.com/Sandoplay"
+            target="_blank"
+            class="github-link"
+          >
+            GitHub
+          </a>
+        </div>
+
+        <!-- Друга колонка -->
+        <div class="footer-column">
+          <h3 class="developer-name">Євген Фроляк</h3>
+          <a
+            href="https://github.com/EugeniusDev"
+            target="_blank"
+            class="github-link"
+          >
+            GitHub
+          </a>
+        </div>
+
+        <!-- Третя колонка -->
+        <div class="footer-column">
+          <h3 class="developer-name">Мушин Максим</h3>
+          <a
+            href="https://github.com/Maksonchyks"
+            target="_blank"
+            class="github-link"
+          >
+            GitHub
+          </a>
+        </div>
+      </div>
+      <div class="copyright">
+        <p>&copy; 2024 Всі права захищено</p>
+      </div>
+    </div>
+  </footer>
+</template>
+
+<script>
+export default {
+  name: 'FooterComponent'
+}
+</script>
+
+<style scoped>
+.footer {
+  background-color: #2c3e50;
+  color: white;
+  padding: 30px 0;
+  margin-top: auto;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.footer-columns {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.footer-column {
+  text-align: center;
+  padding: 0 15px;
+}
+
+.developer-name {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: #ecf0f1;
+}
+
+.github-link {
+  color: #3498db;
+  text-decoration: none;
+  padding: 5px 10px;
+  border: 1px solid #3498db;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.github-link:hover {
+  background-color: #3498db;
+  color: white;
+}
+
+.copyright {
+  text-align: center;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #34495e;
+  font-size: 0.9rem;
+  color: #bdc3c7;
+}
+
+@media (max-width: 768px) {
+  .footer-columns {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .footer-column {
+    padding: 10px 0;
+  }
+}
+</style>
+########
+
+components\HelloWorld.vue
+<template>
+  <v-container class="fill-height">
+    <v-responsive
+      class="align-centerfill-height mx-auto"
+      max-width="900"
+    >
+      <v-img
+        class="mb-4"
+        height="150"
+        src="@/assets/logo.png"
+      />
+
+      <div class="text-center">
+        <div class="text-body-2 font-weight-light mb-n1">Welcome to</div>
+
+        <h1 class="text-h2 font-weight-bold">Vuetify</h1>
+      </div>
+
+      <div class="py-4" />
+
+      <v-row>
+        <v-col cols="12">
+          <v-card
+            class="py-4"
+            color="surface-variant"
+            image="https://cdn.vuetifyjs.com/docs/images/one/create/feature.png"
+            prepend-icon="mdi-rocket-launch-outline"
+            rounded="lg"
+            variant="outlined"
+          >
+            <template #image>
+              <v-img position="top right" />
+            </template>
+
+            <template #title>
+              <h2 class="text-h5 font-weight-bold">Get started</h2>
+            </template>
+
+            <template #subtitle>
+              <div class="text-subtitle-1">
+                Replace this page by removing <v-kbd>{{ `<HelloWorld />` }}</v-kbd> in <v-kbd>pages/index.vue</v-kbd>.
+              </div>
+            </template>
+
+            <v-overlay
+              opacity=".12"
+              scrim="primary"
+              contained
+              model-value
+              persistent
+            />
+          </v-card>
+        </v-col>
+
+        <v-col cols="6">
+          <v-card
+            append-icon="mdi-open-in-new"
+            class="py-4"
+            color="surface-variant"
+            href="https://vuetifyjs.com/"
+            prepend-icon="mdi-text-box-outline"
+            rel="noopener noreferrer"
+            rounded="lg"
+            subtitle="Learn about all things Vuetify in our documentation."
+            target="_blank"
+            title="Documentation"
+            variant="text"
+          >
+            <v-overlay
+              opacity=".06"
+              scrim="primary"
+              contained
+              model-value
+              persistent
+            />
+          </v-card>
+        </v-col>
+
+        <v-col cols="6">
+          <v-card
+            append-icon="mdi-open-in-new"
+            class="py-4"
+            color="surface-variant"
+            href="https://vuetifyjs.com/introduction/why-vuetify/#feature-guides"
+            prepend-icon="mdi-star-circle-outline"
+            rel="noopener noreferrer"
+            rounded="lg"
+            subtitle="Explore available framework Features."
+            target="_blank"
+            title="Features"
+            variant="text"
+          >
+            <v-overlay
+              opacity=".06"
+              scrim="primary"
+              contained
+              model-value
+              persistent
+            />
+          </v-card>
+        </v-col>
+
+        <v-col cols="6">
+          <v-card
+            append-icon="mdi-open-in-new"
+            class="py-4"
+            color="surface-variant"
+            href="https://vuetifyjs.com/components/all"
+            prepend-icon="mdi-widgets-outline"
+            rel="noopener noreferrer"
+            rounded="lg"
+            subtitle="Discover components in the API Explorer."
+            target="_blank"
+            title="Components"
+            variant="text"
+          >
+            <v-overlay
+              opacity=".06"
+              scrim="primary"
+              contained
+              model-value
+              persistent
+            />
+          </v-card>
+        </v-col>
+
+        <v-col cols="6">
+          <v-card
+            append-icon="mdi-open-in-new"
+            class="py-4"
+            color="surface-variant"
+            href="https://discord.vuetifyjs.com"
+            prepend-icon="mdi-account-group-outline"
+            rel="noopener noreferrer"
+            rounded="lg"
+            subtitle="Connect with Vuetify developers."
+            target="_blank"
+            title="Community"
+            variant="text"
+          >
+            <v-overlay
+              opacity=".06"
+              scrim="primary"
+              contained
+              model-value
+              persistent
+            />
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-responsive>
+  </v-container>
+</template>
+
+<script setup lang="ts">
+  //
+</script>
+########
+
+pages\CartPage.vue
+// src/pages/CartPage.vue
+<template>
+  <v-container>
+    <h1 class="text-h4 mb-6">Shopping Cart</h1>
+
+    <v-alert v-if="cartItems.length === 0" type="info">
+      Your cart is empty
+    </v-alert>
+
+    <v-row v-else>
+      <v-col cols="12" md="8">
+        <v-card>
+          <v-list>
+            <v-list-item v-for="item in cartItems" :key="item.id">
+              <template #prepend>
+                <v-img :src="item.image" width="100" height="100" cover />
+              </template>
+
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
+              <v-list-item-subtitle>
+                ${{ item.price }} x {{ item.quantity }}
+              </v-list-item-subtitle>
+
+              <template #append>
+                <v-btn
+                  icon="mdi-delete"
+                  variant="text"
+                  color="error"
+                  @click="removeFromCart(item.id)"
+                />
+              </template>
+            </v-list-item>
+          </v-list>
+        </v-card>
+      </v-col>
+
+      <v-col cols="12" md="4">
+        <v-card>
+          <v-card-title>Order Summary</v-card-title>
+          <v-card-text>
+            <div class="d-flex justify-space-between mb-2">
+              <span>Total:</span>
+              <span>${{ totalAmount.toFixed(2) }}</span>
+            </div>
+          </v-card-text>
+          <v-card-actions>
+            <v-btn color="primary" block @click="checkout"> Checkout </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
+</template>
+
+<script setup lang="ts">
+import { useCartStore } from '@/stores/cart'
+import { storeToRefs } from 'pinia'
+
+const cartStore = useCartStore()
+const { items: cartItems, totalAmount } = storeToRefs(cartStore)
+
+const removeFromCart = (productId: number) => {
+  cartStore.removeFromCart(productId)
+}
+
+const checkout = () => {
+  console.log('Checkout clicked')
+}
+</script>
+########
+
+pages\FavoritesPage.vue
+// src/pages/FavoritesPage.vue
+<template>
+  <v-container>
+    <h1 class="text-h4 mb-6">Favorite Products</h1>
+
+    <v-alert v-if="favorites.length === 0" type="info">
+      You haven't added any products to your favorites yet
+    </v-alert>
+
+    <v-row>
+      <v-col
+        v-for="product in favorites"
+        :key="product.id"
+        cols="12"
+        sm="6"
+        md="4"
+        lg="3"
+      >
+        <v-card>
+          <v-img :src="product.image" height="200" cover />
+          <v-card-title class="text-truncate">
+            {{ product.title }}
+          </v-card-title>
+          <v-card-text> ${{ product.price }} </v-card-text>
+          <v-card-actions>
+            <v-btn variant="text" :to="`/products/${product.id}`">
+              Details
+            </v-btn>
+            <v-spacer />
+            <v-btn
+              icon="mdi-heart"
+              color="red"
+              variant="text"
+              @click="toggleFavorite(product)"
+            />
+            <v-btn icon="mdi-cart" variant="text" @click="addToCart(product)" />
+          </v-card-actions>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
+</template>
+
+<script setup lang="ts">
+import { storeToRefs } from 'pinia'
+import { useFavoritesStore } from '@/stores/favorites'
+import { useCartStore } from '@/stores/cart'
+import type { Product } from '@/types/product'
+
+const favoritesStore = useFavoritesStore()
+const cartStore = useCartStore()
+
+const { items: favorites } = storeToRefs(favoritesStore)
+
+const toggleFavorite = (product: Product) => {
+  favoritesStore.toggleFavorite(product)
+}
+
+const addToCart = (product: Product) => {
+  cartStore.addToCart(product)
+}
+</script>
+########
+
+pages\HomePage.vue
+<template>
+  <v-container>
+    <h1 class="text-h2 mb-6">Welcome to Our Store</h1>
+    <v-row>
+      <v-col cols="12" md="6">
+        <v-card>
+          <v-card-title>Latest Products</v-card-title>
+          <v-card-text> Check out our newest arrivals </v-card-text>
+          <v-card-actions>
+            <v-btn color="primary" to="/products"> Browse Products </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
+</template>
+
+<script setup lang="ts">
+// Component logic here
+</script>
+########
+
+pages\NotFoundPage.vue
+// src/pages/NotFoundPage.vue
+<template>
+  <v-container class="text-center">
+    <h1 class="text-h2 mb-6">404</h1>
+    <p class="text-h4 mb-6">Page Not Found</p>
+    <v-btn color="primary" to="/"> Go Home </v-btn>
+  </v-container>
+</template>
+########
+
+pages\ProductDetailPage.vue
+// src/pages/ProductDetailPage.vue
+<template>
+  <v-container>
+    <div v-if="product">
+      <v-breadcrumbs :items="breadcrumbs" />
+
+      <v-row>
+        <v-col cols="12" md="6">
+          <v-img
+              :src="product.image"
+              height="400"
+              cover
+              class="bg-grey-lighten-2"
+          />
+        </v-col>
+
+        <v-col cols="12" md="6">
+          <h1 class="text-h4 mb-4">{{ product.title }}</h1>
+          <div class="text-h5 mb-4">${{ product.price }}</div>
+          <p class="mb-4">{{ product.description }}</p>
+
+          <v-btn color="primary" class="mr-2" @click="addToCart(product)">
+            Add to Cart
+          </v-btn>
+
+          <v-btn
+              :color="isFavorite ? 'red' : undefined"
+              variant="outlined"
+              @click="toggleFavorite(product)"
+          >
+            {{ isFavorite ? 'Remove from Favorites' : 'Add to Favorites' }}
+          </v-btn>
+        </v-col>
+      </v-row>
+    </div>
+  </v-container>
+</template>
+
+<script setup lang="ts">
+import { computed, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
+import { useProductsStore } from '@/stores/products'
+import { useCartStore } from '@/stores/cart'
+import { useFavoritesStore } from '@/stores/favorites'
+import { storeToRefs } from 'pinia'
+import type { Product } from '@/types/product'
+
+const route = useRoute()
+const productsStore = useProductsStore()
+const cartStore = useCartStore()
+const favoritesStore = useFavoritesStore()
+
+const { currentProduct: product } = storeToRefs(productsStore)
+
+const breadcrumbs = computed(() => [
+  {
+    title: 'Products',
+    to: '/products',
+  },
+  {
+    title: product.value?.title || '',
+    disabled: true,
+  },
+])
+
+const isFavorite = computed(() =>
+    product.value ? favoritesStore.isFavorite(product.value.id) : false,
+)
+
+onMounted(async () => {
+  const productId = Number(route.params.id)
+  await productsStore.fetchProduct(productId)
+})
+
+const addToCart = (product: Product) => {
+  cartStore.addToCart(product)
+}
+
+const toggleFavorite = (product: Product) => {
+  favoritesStore.toggleFavorite(product)
+}
+</script>
+########
+
+pages\ProductListPage.vue
+<template>
+  <v-container>
+    <!-- Filters -->
+    <v-card class="mb-6">
+      <v-card-text>
+        <v-row>
+          <v-col cols="12" sm="4">
+            <v-text-field
+                v-model="searchTitle"
+                label="Search products"
+                prepend-inner-icon="mdi-magnify"
+                variant="outlined"
+                density="comfortable"
+                hide-details
+                @update:model-value="updateFilters"
+            />
+          </v-col>
+
+          <v-col cols="12" sm="4">
+            <v-select
+                v-model="selectedCategory"
+                :items="categories"
+                label="Category"
+                variant="outlined"
+                density="comfortable"
+                hide-details
+                clearable
+                @update:model-value="updateFilters"
+            />
+          </v-col>
+
+          <!-- Price range -->
+          <v-col cols="12" sm="4">
+            <v-range-slider
+                v-model="priceRange"
+                :min="0"
+                :max="1000"
+                :step="10"
+                label="Price range"
+                hide-details
+                @update:model-value="updateFilters"
+            >
+              <template #prepend>
+                <v-text-field
+                    v-model="priceRange[0]"
+                    type="number"
+                    variant="outlined"
+                    density="comfortable"
+                    hide-details
+                    style="width: 100px"
+                />
+              </template>
+              <template #append>
+                <v-text-field
+                    v-model="priceRange[1]"
+                    type="number"
+                    variant="outlined"
+                    density="comfortable"
+                    hide-details
+                    style="width: 100px"
+                />
+              </template>
+            </v-range-slider>
+          </v-col>
+        </v-row>
+      </v-card-text>
+    </v-card>
+
+    <!-- Loading state -->
+    <v-progress-circular
+        v-if="loading"
+        indeterminate
+        color="primary"
+        class="d-flex mx-auto my-8"
+    />
+
+    <v-alert v-if="error" type="error" class="mb-6">
+      {{ error }}
+    </v-alert>
+
+    <v-row v-if="!loading && !error">
+      <v-col
+          v-for="product in paginatedProducts"
+          :key="product.id"
+          cols="12"
+          sm="6"
+          md="4"
+          lg="3"
+      >
+        <v-card>
+          <v-img
+              :src="product.image"
+              height="200"
+              cover
+              class="bg-grey-lighten-2"
+          />
+
+          <v-card-title class="text-truncate">
+            {{ product.title }}
+          </v-card-title>
+
+          <v-card-text>
+            <div class="d-flex align-center justify-space-between">
+              <span class="text-h6">${{ product.price }}</span>
+              <v-rating
+                  :model-value="product.rating.rate"
+                  readonly
+                  density="compact"
+                  size="small"
+              />
+            </div>
+          </v-card-text>
+
+          <v-card-actions>
+            <v-btn variant="text" :to="`/products/${product.id}`">
+              Details
+            </v-btn>
+            <v-spacer />
+            <v-btn
+                icon="mdi-heart"
+                variant="text"
+                @click="toggleFavorite(product)"
+            />
+            <v-btn icon="mdi-cart" variant="text" @click="addToCart(product)" />
+          </v-card-actions>
+        </v-card>
+      </v-col>
+    </v-row>
+
+    <!-- Pagination -->
+    <v-pagination
+        v-if="totalPages > 1"
+        v-model="currentPage"
+        :length="totalPages"
+        class="mt-6"
+    />
+  </v-container>
+</template>
+
+<script setup lang="ts">
+import { ref, onMounted, watch } from 'vue'
+import { useProductsStore } from '@/stores/products'
+import { useCartStore } from '@/stores/cart'
+import { useFavoritesStore } from '@/stores/favorites'
+import { storeToRefs } from 'pinia'
+import { useRoute, useRouter } from 'vue-router'
+import type { Product } from '@/types/product'
+
+const route = useRoute()
+const router = useRouter()
+const productsStore = useProductsStore()
+const cartStore = useCartStore()
+const favoritesStore = useFavoritesStore()
+
+const { paginatedProducts, loading, error, categories, totalPages } =
+    storeToRefs(productsStore)
+
+const searchTitle = ref('')
+const selectedCategory = ref('')
+const priceRange = ref([0, 1000])
+const currentPage = ref(1)
+
+// Initialize filters from URL
+onMounted(async () => {
+  const { title, category, minPrice, maxPrice, page } = route.query
+
+  if (title) searchTitle.value = title as string
+  if (category) selectedCategory.value = category as string
+  if (minPrice) priceRange.value[0] = Number(minPrice)
+  if (maxPrice) priceRange.value[1] = Number(maxPrice)
+  if (page) currentPage.value = Number(page)
+
+  await Promise.all([
+    productsStore.fetchProducts(),
+    productsStore.fetchCategories(),
+  ])
+})
+
+// Update URL when filters change
+const addToCart = (product: Product) => {
+  cartStore.addToCart(product)
+}
+
+const toggleFavorite = (product: Product) => {
+  favoritesStore.toggleFavorite(product)
+}
+
+// updateFilters залишається таким самим, оскільки тут немає параметра product
+const updateFilters = () => {
+  router.push({
+    query: {
+      title: searchTitle.value || undefined,
+      category: selectedCategory.value || undefined,
+      minPrice: priceRange.value[0] || undefined,
+      maxPrice: priceRange.value[1] || undefined,
+      page: currentPage.value > 1 ? currentPage.value : undefined,
+    },
+  })
+
+  productsStore.updateFilter({
+    title: searchTitle.value,
+    category: selectedCategory.value,
+    minPrice: priceRange.value[0],
+    maxPrice: priceRange.value[1],
+    page: currentPage.value,
+  })
+}
+
+// Watch page changes
+watch(currentPage, newPage => {
+  productsStore.setPage(newPage)
+  updateFilters()
+})
+</script>
+########
+
+plugins\index.ts
+/**
+ * plugins/index.ts
+ *
+ * Automatically included in `./src/main.ts`
+ */
+
+// Plugins
+import vuetify from './vuetify'
+import router from '../router'
+
+// Types
+import type { App } from 'vue'
+
+export function registerPlugins (app: App) {
+  app
+    .use(vuetify)
+    .use(router)
+}
+########
+
+plugins\persistedState.ts
+import { watch } from 'vue'
+import { type PiniaPluginContext } from 'pinia'
+
+export function createPersistedState(options?: {
+  key?: string
+  paths?: string[]
+}) {
+  return ({ store}: PiniaPluginContext) => {
+    const storageKey = options?.key || `${store.$id}`
+
+    // Load initial state from localStorage
+    const savedState = localStorage.getItem(storageKey)
+    if (savedState) {
+      store.$patch(JSON.parse(savedState))
+    }
+
+    watch(
+      () => store.$state,
+      (state) => {
+        localStorage.setItem(storageKey, JSON.stringify(state))
+      },
+      { deep: true }
+    )
+  }
+}
+########
+
+plugins\vuetify.ts
+/**
+ * plugins/vuetify.ts
+ *
+ * Framework documentation: https://vuetifyjs.com`
+ */
+
+// Styles
+import '@mdi/font/css/materialdesignicons.css'
+import 'vuetify/styles'
+
+// Composables
+import { createVuetify } from 'vuetify'
+
+// https://vuetifyjs.com/en/introduction/why-vuetify/#feature-guides
+export default createVuetify({
+  theme: {
+    defaultTheme: 'dark',
+  },
+})
+########
+
+router\index.ts
+import { createRouter, createWebHashHistory } from 'vue-router';
+
+const router = createRouter({
+  history: createWebHashHistory(import.meta.env.BASE_URL),
+  routes: [
+    {
+      path: '/',
+      name: 'home',
+      component: () => import('@/pages/HomePage.vue'),
+    },
+    {
+      path: '/products',
+      name: 'products',
+      component: () => import('@/pages/ProductListPage.vue'),
+    },
+    {
+      path: '/products/:id',
+      name: 'product-detail',
+      component: () => import('@/pages/ProductDetailPage.vue'),
+    },
+    {
+      path: '/cart',
+      name: 'cart',
+      component: () => import('@/pages/CartPage.vue'),
+    },
+    {
+      path: '/favorites',
+      name: 'favorites',
+      component: () => import('@/pages/FavoritesPage.vue'),
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'not-found',
+      component: () => import('@/pages/NotFoundPage.vue'),
+    },
+  ],
+  scrollBehavior: (to, from, savedPosition) => {
+    if (savedPosition) {
+      return savedPosition;
+    }
+    return { top: 0 };
+  },
+});
+
+export default router;
+########
+
+stores\cart.ts
+import { defineStore } from 'pinia';
+import type { Product } from '@/types/product';
+
+interface CartItem extends Product {
+  quantity: number;
+}
+
+export const useCartStore = defineStore('cart', {
+  state: () => ({
+    items: [] as CartItem[],
+  }),
+
+  getters: {
+    totalItems: (state) =>
+      state.items.reduce((sum, item) => sum + item.quantity, 0),
+
+    totalAmount: (state) =>
+      state.items.reduce((sum, item) => sum + item.price * item.quantity, 0),
+  },
+
+  actions: {
+    addToCart(product: Product) {
+      const existingItem = this.items.find(item => item.id === product.id);
+      if (existingItem) {
+        existingItem.quantity += 1;
+      } else {
+        this.items.push({ ...product, quantity: 1 });
+      }
+      this.saveToLocalStorage();
+    },
+
+    removeFromCart(productId: number) {
+      this.items = this.items.filter(item => item.id !== productId);
+      this.saveToLocalStorage();
+    },
+
+    updateQuantity(productId: number, change: number) {
+      const item = this.items.find(item => item.id === productId);
+      if (item) {
+        item.quantity = Math.max(1, item.quantity + change);
+        this.saveToLocalStorage();
+      }
+    },
+
+    clearCart() {
+      this.items = [];
+      this.saveToLocalStorage();
+    },
+
+    saveToLocalStorage() {
+      localStorage.setItem('cart', JSON.stringify(this.items));
+    },
+
+    loadFromLocalStorage() {
+      const savedItems = localStorage.getItem('cart');
+      if (savedItems) {
+        this.items = JSON.parse(savedItems);
+      }
+    },
+  },
+});
+########
+
+stores\favorites.ts
+import { defineStore } from 'pinia';
+import type { Product } from '@/types/product';
+
+export const useFavoritesStore = defineStore('favorites', {
+  state: () => ({
+    items: [] as Product[],
+  }),
+
+  actions: {
+    toggleFavorite(product: Product) {
+      const index = this.items.findIndex(item => item.id === product.id);
+      if (index === -1) {
+        this.items.push(product);
+      } else {
+        this.items.splice(index, 1);
+      }
+      this.saveToLocalStorage();
+    },
+
+    isFavorite(productId: number): boolean {
+      return this.items.some(item => item.id === productId);
+    },
+
+    saveToLocalStorage() {
+      localStorage.setItem('favorites', JSON.stringify(this.items));
+    },
+
+    loadFromLocalStorage() {
+      const saved = localStorage.getItem('favorites');
+      if (saved) {
+        this.items = JSON.parse(saved);
+      }
+    },
+  },
+});
+########
+
+stores\products.ts
+import { defineStore } from 'pinia';
+import { productsApi } from '@/api/products';
+import type { Product } from '@/types/product';
+import type { ProductFilter } from '@/types/filter';
+
+export const useProductsStore = defineStore('products', {
+  state: () => ({
+    products: [] as Product[],
+    filteredProducts: [] as Product[],
+    categories: [] as string[],
+    currentProduct: null as Product | null,
+    loading: false,
+    error: null as string | null,
+    filter: {
+      title: '',
+      category: '',
+      minPrice: 0,
+      maxPrice: 1000,
+      page: 1,
+      limit: 12,
+    } satisfies ProductFilter,
+  }),
+
+  getters: {
+    paginatedProducts: (state) => {
+      const start = (state.filter.page - 1) * state.filter.limit;
+      const end = start + state.filter.limit;
+      return state.filteredProducts.slice(start, end);
+    },
+    totalPages: (state) =>
+      Math.ceil(state.filteredProducts.length / state.filter.limit),
+  },
+
+  actions: {
+    async fetchProducts() {
+      this.loading = true;
+      this.error = null;
+      try {
+        this.products = await productsApi.getProducts();
+        this.applyFilters();
+      } catch (error) {
+        this.error = 'Failed to fetch products';
+        console.error(error);
+      } finally {
+        this.loading = false;
+      }
+    },
+
+    async fetchCategories() {
+      this.loading = true;
+      this.error = null;
+      try {
+        this.categories = await productsApi.getCategories();
+      } catch (error) {
+        this.error = 'Failed to fetch categories';
+        console.error(error);
+      } finally {
+        this.loading = false;
+      }
+    },
+
+    async fetchProduct(id: number) {
+      this.loading = true;
+      this.error = null;
+      try {
+        this.currentProduct = await productsApi.getProduct(id);
+      } catch (error) {
+        this.error = 'Failed to fetch product';
+        console.error(error);
+      } finally {
+        this.loading = false;
+      }
+    },
+
+    applyFilters() {
+      let filtered = [...this.products];
+
+      // Filter by title
+      if (this.filter.title.length > 0) {
+        filtered = filtered.filter(product =>
+          product.title.toLowerCase().includes(this.filter.title.toLowerCase())
+        );
+      }
+
+      // Filter by category
+      if (this.filter.category.length > 0) {
+        filtered = filtered.filter(product =>
+          product.category === this.filter.category
+        );
+      }
+
+      // Filter by price
+      filtered = filtered.filter(product =>
+        product.price >= this.filter.minPrice &&
+        product.price <= this.filter.maxPrice
+      );
+
+      this.filteredProducts = filtered;
+    },
+
+    updateFilter(filter: Partial<ProductFilter>) {
+      this.filter = {
+        ...this.filter,
+        ...filter
+      };
+      this.applyFilters();
+    },
+
+    setPage(page: number) {
+      this.filter.page = page;
+    },
+  },
+});
+########
+
+types\category.ts
+export interface Category {
+  id: number;
+  name: string;
+  image: string;
+}
+########
+
+types\filter.ts
+export interface ProductFilter {
+  title: string;
+  category: string;
+  minPrice: number;
+  maxPrice: number;
+  page: number;
+  limit: number;
+}
+########
+
+types\product.ts
+export interface Product {
+  id: number;
+  title: string;
+  price: number;
+  description: string;
+  category: string;
+  image: string;
+  rating: {
+    rate: number;
+    count: number;
+  };
+}
+########
+
+App.vue
+<template>
+  <v-app>
+    <v-app-bar>
+      <v-app-bar-title>E-commerce App</v-app-bar-title>
+      <v-spacer />
+      <v-btn to="/">Home</v-btn>
+      <v-btn to="/products">Products</v-btn>
+      <v-btn to="/cart">Cart</v-btn>
+      <v-btn to="/favorites">Favorites</v-btn>
+    </v-app-bar>
+
+    <v-main>
+      <router-view />
+    </v-main>
+
+    <Footer />
+  </v-app>
+</template>
+
+<script setup lang="ts">
+import Footer from '@/components/Footer.vue'
+</script>
+########
+
+main.ts
+import { createApp } from 'vue';
+import { createPinia } from 'pinia';
+import App from './App.vue';
+import router from './router';
+import { createPersistedState } from './plugins/persistedState'
+
+import 'vuetify/styles';
+import { createVuetify } from 'vuetify';
+import * as components from 'vuetify/components';
+import * as directives from 'vuetify/directives';
+import '@mdi/font/css/materialdesignicons.css';
+
+const vuetify = createVuetify({
+  components,
+  directives,
+});
+
+const pinia = createPinia();
+pinia.use(createPersistedState());
+
+const app = createApp(App);
+app.use(pinia);
+app.use(router);
+app.use(vuetify);
+
+app.mount('#app');
+########
+
+vite-env.d.ts
+/// <reference types="vite/client" />
+
+declare module '*.vue' {
+  import type { DefineComponent } from 'vue'
+  const component: DefineComponent<{}, {}, any>
+  export default component
+}
+########
+

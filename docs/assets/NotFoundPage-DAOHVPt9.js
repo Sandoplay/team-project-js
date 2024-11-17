@@ -1,0 +1,2 @@
+import{_ as a,e as r,g as s}from"./index-BsPRUUIS.js";import{B as n,R as d,S as e,a6 as o,y as m,U as f}from"./vue-CsJlAH0e.js";import"./vuetify-BpRWpd-r.js";const l={};function c(i,t){return n(),d(s,{class:"text-center"},{default:e(()=>[t[1]||(t[1]=o("h1",{class:"text-h2 mb-6"},"404",-1)),t[2]||(t[2]=o("p",{class:"text-h4 mb-6"},"Page Not Found",-1)),m(r,{color:"primary",to:"/"},{default:e(()=>t[0]||(t[0]=[f(" Go Home ")])),_:1})]),_:1})}const B=a(l,[["render",c]]);export{B as default};
+//# sourceMappingURL=NotFoundPage-DAOHVPt9.js.map

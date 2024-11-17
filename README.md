@@ -1,81 +1,117 @@
-# Vuetify (Default)
+# Vue.js E-commerce Застосунок
 
-This is the official scaffolding tool for Vuetify, designed to give you a head start in building your new Vuetify application. It sets up a base template with all the necessary configurations and standard directory structure, enabling you to begin development without the hassle of setting up the project from scratch.
+Сучасний e-commerce застосунок, побудований за допомогою Vue 3, TypeScript та Vuetify, що використовує Fake Store API. Цей проєкт демонструє найкращі практики розробки на Vue.js, управління станом за допомогою Pinia та принципи адаптивного дизайну.
 
-## ❗️ Important Links
+## Особливості
 
-- 📄 [Docs](https://vuetifyjs.com/)
-- 🚨 [Issues](https://issues.vuetifyjs.com/)
-- 🏬 [Store](https://store.vuetifyjs.com/)
-- 🎮 [Playground](https://play.vuetifyjs.com/)
-- 💬 [Discord](https://community.vuetifyjs.com)
+- 🛍️ Перегляд товарів з пагінацією
+- 🔍 Розширена система фільтрації (за назвою, ціновим діапазоном та категорією)
+- 🛒 Функціонал кошика
+- ❤️ Список улюблених товарів
+- 💾 Збереження даних у localStorage
+- 📱 Адаптивний дизайн з використанням Vuetify
+- 🌐 URL-параметри для фільтрів
+- ⚡ Безпечна типізація з TypeScript
 
-## 💿 Install
+## Технічний стек
 
-Set up your project using your preferred package manager. Use the corresponding command to install the dependencies:
+- Vue 3
+- TypeScript
+- Vuetify
+- Pinia (Управління станом)
+- Vue Router
+- Axios
+- Vite
 
-| Package Manager                                                | Command        |
-|---------------------------------------------------------------|----------------|
-| [yarn](https://yarnpkg.com/getting-started)                   | `yarn install` |
-| [npm](https://docs.npmjs.com/cli/v7/commands/npm-install)     | `npm install`  |
-| [pnpm](https://pnpm.io/installation)                          | `pnpm install` |
-| [bun](https://bun.sh/#getting-started)                        | `bun install`  |
+## Структура проєкту
 
-After completing the installation, your environment is ready for Vuetify development.
+```
+├── src/
+│   ├── api/           # Шар API з визначенням ендпоінтів
+│   ├── components/    # Компоненти Vue що використовуються повторно
+│   ├── pages/         # Компоненти сторінок
+│   ├── plugins/       # Налаштування плагінів Vue
+│   ├── router/        # Налаштування Vue Router
+│   ├── stores/        # Сховища Pinia
+│   ├── types/         # Визначення типів TypeScript
+│   └── App.vue        # Кореневий компонент
+```
 
-## ✨ Features
+## Початок роботи
 
-- 🖼️ **Optimized Front-End Stack**: Leverage the latest Vue 3 and Vuetify 3 for a modern, reactive UI development experience. [Vue 3](https://v3.vuejs.org/) | [Vuetify 3](https://vuetifyjs.com/en/)
-- 🗃️ **State Management**: Integrated with [Pinia](https://pinia.vuejs.org/), the intuitive, modular state management solution for Vue.
-- 🚦 **Routing and Layouts**: Utilizes Vue Router for SPA navigation and vite-plugin-vue-layouts for organizing Vue file layouts. [Vue Router](https://router.vuejs.org/) | [vite-plugin-vue-layouts](https://github.com/JohnCampionJr/vite-plugin-vue-layouts)
-- 💻 **Enhanced Development Experience**: Benefit from TypeScript's static type checking and the ESLint plugin suite for Vue, ensuring code quality and consistency. [TypeScript](https://www.typescriptlang.org/) | [ESLint Plugin Vue](https://eslint.vuejs.org/)
-- ⚡ **Next-Gen Tooling**: Powered by Vite, experience fast cold starts and instant HMR (Hot Module Replacement). [Vite](https://vitejs.dev/)
-- 🧩 **Automated Component Importing**: Streamline your workflow with unplugin-vue-components, automatically importing components as you use them. [unplugin-vue-components](https://github.com/antfu/unplugin-vue-components)
-- 🛠️ **Strongly-Typed Vue**: Use vue-tsc for type-checking your Vue components, and enjoy a robust development experience. [vue-tsc](https://github.com/johnsoncodehk/volar/tree/master/packages/vue-tsc)
+### Передумови
 
-These features are curated to provide a seamless development experience from setup to deployment, ensuring that your Vuetify application is both powerful and maintainable.
+- Node.js (версія 16 або вище)
+- npm або yarn
 
-## 💡 Usage
+### Встановлення
 
-This section covers how to start the development server and build your project for production.
-
-### Starting the Development Server
-
-To start the development server with hot-reload, run the following command. The server will be accessible at [http://localhost:3000](http://localhost:3000):
-
+1. Клонуйте репозиторій:
 ```bash
+git clone https://github.com/your-username/vue-ecommerce-app.git
+cd vue-ecommerce-app
+```
+
+2. Встановіть залежності:
+```bash
+npm install
+# або
+yarn install
+```
+
+3. Запустіть сервер розробки:
+```bash
+npm run dev
+# або
 yarn dev
 ```
 
-(Repeat for npm, pnpm, and bun with respective commands.)
-
-> Add NODE_OPTIONS='--no-warnings' to suppress the JSON import warnings that happen as part of the Vuetify import mapping. If you are on Node [v21.3.0](https://nodejs.org/en/blog/release/v21.3.0) or higher, you can change this to NODE_OPTIONS='--disable-warning=5401'. If you don't mind the warning, you can remove this from your package.json dev script.
-
-### Building for Production
-
-To build your project for production, use:
-
+4. Збірка для продакшену:
 ```bash
+npm run build
+# або
 yarn build
 ```
 
-(Repeat for npm, pnpm, and bun with respective commands.)
+## Детальний опис функціоналу
 
-Once the build process is completed, your application will be ready for deployment in a production environment.
+### Список товарів
+- Відображення товарів у адаптивній сітці
+- Кожен товар показує зображення, назву, ціну та рейтинг
+- Швидкі дії для додавання в кошик та улюблені
 
-## 💪 Support Vuetify Development
+### Система фільтрації
+- Пошук товарів за назвою
+- Фільтрація за ціновим діапазоном
+- Фільтрація за категорією
+- Всі фільтри синхронізуються з параметрами URL
 
-This project is built with [Vuetify](https://vuetifyjs.com/en/), a UI Library with a comprehensive collection of Vue components. Vuetify is an MIT licensed Open Source project that has been made possible due to the generous contributions by our [sponsors and backers](https://vuetifyjs.com/introduction/sponsors-and-backers/). If you are interested in supporting this project, please consider:
+### Кошик
+- Додавання/видалення товарів
+- Зміна кількості
+- Збереження в localStorage
+- Розрахунок загальної суми
 
-- [Requesting Enterprise Support](https://support.vuetifyjs.com/)
-- [Sponsoring John on Github](https://github.com/users/johnleider/sponsorship)
-- [Sponsoring Kael on Github](https://github.com/users/kaelwd/sponsorship)
-- [Supporting the team on Open Collective](https://opencollective.com/vuetify)
-- [Becoming a sponsor on Patreon](https://www.patreon.com/vuetify)
-- [Becoming a subscriber on Tidelift](https://tidelift.com/subscription/npm/vuetify)
-- [Making a one-time donation with Paypal](https://paypal.me/vuetify)
+### Улюблені товари
+- Додавання/видалення товарів з улюблених
+- Збереження в localStorage
+- Швидкий доступ до улюблених товарів
 
-## 📑 License
-[MIT](http://opensource.org/licenses/MIT)
+### Управління станом
+- Централізоване управління станом за допомогою Pinia
+- Окремі сховища для товарів, кошика та улюблених
+- Плагін для збереження стану в localStorage
 
-Copyright (c) 2016-present Vuetify, LLC
+## Інтеграція з API
+
+Застосунок використовує Fake Store API для даних про товари. Інтеграція з API реалізована через:
+- Axios для HTTP-запитів
+- Централізовані ендпоінти в директорії `/api`
+- Типізовані відповіді API з використанням інтерфейсів TypeScript
+- Обробка помилок та станів завантаження
+
+## Команда розробників
+
+- Олесь Левицький - [GitHub](https://github.com/Sandoplay)
+- Євген Фроляк - [GitHub](https://github.com/EugeniusDev)
+- Мушин Максим - [GitHub](https://github.com/Maksonchyks)

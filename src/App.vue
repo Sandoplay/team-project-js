@@ -13,12 +13,10 @@
       <router-view />
     </v-main>
 
-    <v-footer app>
-      <span>&copy; 2024</span>
-    </v-footer>
+    <Footer />
   </v-app>
 </template>
 
 <script setup lang="ts">
-// Component logic here
+import Footer from '@/components/Footer.vue'
 </script>

@@ -2,7 +2,6 @@
   <footer class="footer">
     <div class="footer-content">
       <div class="footer-columns">
-        <!-- Перша колонка -->
         <div class="footer-column">
           <h3 class="developer-name">Олесь Левицький</h3>
           <a
@@ -14,7 +13,6 @@
           </a>
         </div>
 
-        <!-- Друга колонка -->
         <div class="footer-column">
           <h3 class="developer-name">Євген Фроляк</h3>
           <a
@@ -26,9 +24,8 @@
           </a>
         </div>
 
-        <!-- Третя колонка -->
         <div class="footer-column">
-          <h3 class="developer-name">Мушин Максим</h3>
+          <h3 class="developer-name">Максим Мушин</h3>
           <a
             href="https://github.com/Maksonchyks"
             target="_blank"

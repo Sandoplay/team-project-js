@@ -1,0 +1,2 @@
+import{ac as i}from"./vue-CsJlAH0e.js";const a=i("favorites",{state:()=>({items:[]}),actions:{toggleFavorite(e){const t=this.items.findIndex(s=>s.id===e.id);t===-1?this.items.push(e):this.items.splice(t,1),this.saveToLocalStorage()},isFavorite(e){return this.items.some(t=>t.id===e)},saveToLocalStorage(){localStorage.setItem("favorites",JSON.stringify(this.items))},loadFromLocalStorage(){const e=localStorage.getItem("favorites");e&&(this.items=JSON.parse(e))}}});export{a as u};
+//# sourceMappingURL=favorites-D7N2Ia4P.js.map

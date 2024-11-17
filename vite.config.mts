@@ -11,12 +11,12 @@ import { fileURLToPath, URL } from 'node:url'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: '/vue-ecommerce-app/', // Оновлений base path для вашого репозиторію
   plugins: [
     VueRouter(),
     Vue({
       template: { transformAssetUrls },
     }),
-    // https://github.com/vuetifyjs/vuetify-loader/tree/master/packages/vite-plugin#readme
     Vuetify({
       autoImport: true,
       styles: {
@@ -26,7 +26,7 @@ export default defineConfig({
     Components(),
     ViteFonts({
       google: {
-        families: [ {
+        families: [{
           name: 'Roboto',
           styles: 'wght@100;300;400;500;700;900',
         }],
@@ -50,5 +50,19 @@ export default defineConfig({
   },
   server: {
     port: 3000,
+  },
+  build: {
+    outDir: 'dist', // Змінюємо назад на dist, оскільки будемо використовувати gh-pages branch
+    emptyOutDir: true,
+    sourcemap: true,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'vuetify': ['vuetify'],
+          'vue': ['vue', 'vue-router', 'pinia'],
+        }
+      }
+    },
+    chunkSizeWarningLimit: 1000,
   },
 })
